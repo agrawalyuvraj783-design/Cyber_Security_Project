@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Student Portal - Device Level Security</title>
+    <!-- Link CSS File -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- PAGE 1: PASSWORD STRENGTH CHECKER -->
+<div class="container" id="login-page">
+    <h2>Admin Security Gate</h2>
+    <p class="subtitle">Enter a <strong>Strong Password</strong> to unlock the Student Portal</p>
+    
+    <input type="password" id="password" placeholder="Enter strong password..." oninput="checkStrength()">
+
+    <div class="strength-bar-bg">
+        <div id="strength-bar" class="strength-bar"></div>
+    </div>
+
+    <p id="strength-text"></p>
+
+    <button id="unlock-btn" disabled onclick="openAdminSearch()">Open Admin Portal</button>
+</div>
+
+<!-- PAGE 2: ADMIN IP SEARCH & BLOCKED DEVICES -->
+<div class="container" id="search-page" style="display: none;">
+    <h2>Student IP Lookup</h2>
+    <p class="subtitle">Select current device & enter student IP to view profile</p>
+
+    <!-- Device Selector to simulate checking from different laptops -->
+    <select id="current-device-select">
+        <option value="Dell Latitude 5420 (Windows 11)">Accessing via: Dell Latitude 5420 (Windows 11)</option>
+        <option value="Apple MacBook Air M2">Accessing via: Apple MacBook Air M2</option>
+        <option value="HP EliteBook 840 G8">Accessing via: HP EliteBook 840 G8</option>
+        <option value="Lenovo ThinkPad X1 Carbon">Accessing via: Lenovo ThinkPad X1 Carbon</option>
+        <option value="Unknown Spam Laptop (Linux)">Accessing via: Unknown Spam Laptop (Linux)</option>
+    </select>
+
+    <input type="text" id="ip-input" placeholder="Enter Student IP (e.g. 192.168.1.101)">
+    <button class="primary-btn" onclick="searchStudent()">Search Student</button>
+
+    <p id="error-msg" class="error-msg"></p>
+
+    <!-- Quick Student Profile Preview -->
+    <div id="result-box" class="result-box">
+        <p><strong>Roll No:</strong> <span id="st-roll"></span></p>
+        <p><strong>Name:</strong> <span id="st-name"></span></p>
+        <p><strong>Course:</strong> <span id="st-course"></span></p>
+        <p><strong>City:</strong> <span id="st-city"></span></p>
+        <p><strong>IP Address:</strong> <span id="st-ip"></span></p>
+        
+        <button class="dashboard-btn" onclick="openStudentDashboard()">Open Student Activity Dashboard</button>
+    </div>
+
+    <!-- Blocked Devices Management -->
+    <div class="panel-section">
+        <strong class="title">Blocked Devices / Laptops List:</strong>
+        <div id="blocked-devices-container">
+            <p style="color: #888; margin: 5px 0;">No devices are currently blocked.</p>
+        </div>
+    </div>
+
+    <button class="logout-btn" onclick="lockPortal()">Lock Portal / Logout</button>
+</div>
+
+<!-- PAGE 3: INDIVIDUAL STUDENT ANALYTICS DASHBOARD -->
+<div class="container" id="student-dashboard-page" style="display: none;">
+    <h2 id="dash-student-name">Student Dashboard</h2>
+    <p class="subtitle" id="dash-student-meta"></p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3 id="dash-open-count">0</h3>
+            <span>Total Times Opened</span>
+        </div>
+        <div class="stat-card">
+            <h3 id="dash-unique-devices" style="color: #8e44ad;">0</h3>
+            <span>Laptops / Devices Used</span>
+        </div>
+    </div>
+
+    <div class="panel-section">
+        <strong class="title">Access Logs (Block or Unblock Specific Laptops):</strong>
+        <div id="dash-history-list" class="history-list"></div>
+    </div>
+    
+    <button class="back-btn" onclick="backToSearch()">Back to Search</button>
+</div>
+
+<!-- Link JavaScript File -->
+<script src="script.js"></script>
+
+</body>
+</html>
